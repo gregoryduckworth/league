@@ -18,9 +18,9 @@
             <tbody>
                 @foreach($players as $player)
                 <tr>
-                    <td><a href="{{ route('players.show',$player->id) }}">{{ $player->name }}</a></td>
+                    <td><a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a></td>
                     <td>
-                        <a href="{{ route('players.show',$player->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('players.edit',$player->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     </td>
                     <td>
                         <form action="{{ route('players.destroy', $player->id)}}" method="post">

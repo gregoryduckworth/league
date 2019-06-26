@@ -20,11 +20,8 @@
 
         Players:<br />
         @foreach($team->players as $player)
-        <li><a href="{{ route('players.show',$player->id) }}">{{ $player->name }}</a></li>
+        <li><a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a></li>
         @endforeach
-
-
-
     </div>
 </div>
 @endsection

@@ -20,6 +20,14 @@ class Team extends Model
             ->withTimestamps();
     }
 
+    public function inLeague($league_id)
+    {
+        if ($this->leagues()->where('league_id', '=', $league_id)->first()) {
+            return true;
+        }
+        return false;
+    }
+
     public function players()
     {
         return $this->hasMany('App\Player');

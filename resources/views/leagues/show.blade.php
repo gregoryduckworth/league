@@ -83,20 +83,29 @@
         <hr>
         <table class="table" id="league_scorers">
             <thead>
-                <th>Name</th>
-                <th>Goals</th>
+                <tr>
+                    <th>Name</th>
+                    <th>Goals</th>
+                    @auth
+                    <th>Actions</th>
+                    @endauth
+                </tr>
             </thead>
             <tbody>
                 @foreach($league->teams as $team)
-                @foreach($team->players as $player)
+                @foreach($team->players AS $player)
                 <tr>
                     <td><a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a></td>
-                    <td>{{ $player->goals }}</td>
+                    <td>{{ $player->leagueGoals($league->id) }}</td>
+                    @auth
+                    <td></td>
+                    @endauth
                 </tr>
                 @endforeach
                 @endforeach
             </tbody>
         </table>
+        <hr>
     </div>
 </div>
 @endsection
@@ -128,9 +137,13 @@
             "searching": false,
             "info": false,
             "lengthChange": false,
+            "language": {
+                "emptyTable": "No fixtures have been generated yet. Let's go and <a href='{{ route('leagues.edit', $league->id) }}'>generate fixtures</a>"
+            }
         });
         $('#league_scorers').DataTable({
             "aaSorting": [
+                [1, 'desc'],
                 [0, 'desc'],
             ],
         });

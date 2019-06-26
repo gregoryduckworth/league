@@ -18,7 +18,9 @@
             <tbody>
                 @foreach($leagues as $league)
                 <tr>
-                    <td><a href="{{ route('leagues.show',$league->id) }}">{{ $league->name }}</a></td>
+                    <td>
+                        <a href="{{ route('leagues.show',$league->id) }}">{{ $league->name }}</a>
+                    </td>
                     <td>
                         <a href="{{ route('leagues.edit',$league->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     </td>

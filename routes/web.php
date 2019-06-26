@@ -14,7 +14,11 @@
 Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::resource('fixtures', 'FixtureController');
+Route::patch('fixtures/updateDate/{id}', 'FixtureController@updateDate')->name('fixtures.updateDate');
+Route::patch('leagues/addTeams/{id}', 'LeagueController@addTeams')->name('leagues.addTeams');
 Route::resource('leagues', 'LeagueController');
 Route::get('leagues/generateFixtures/{id}', 'LeagueController@generateFixtures')->name('generateFixtures');
+Route::get('editGoals/{player_id}/{league_id}', 'PlayerController@editGoals')->name('players.editGoals');
+Route::patch('editGoals/{player_id}/{league_id}', 'PlayerController@postEditGoals')->name('players.postEditGoals');
 Route::resource('players', 'PlayerController');
 Route::resource('teams', 'TeamController');

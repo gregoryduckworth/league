@@ -32,14 +32,12 @@ class FixtureController extends Controller
         $request->validate([
             'team_1_score' => 'required|integer',
             'team_2_score' => 'required|integer',
-            'date' => 'required|date',
         ]);
 
         $fixture = Fixture::find($id);
         $fixture->update([
             'team_1_score' => $request->get('team_1_score'),
             'team_2_score' => $request->get('team_2_score'),
-            'date' => $request->get('date'),
         ]);
 
         $league = League::find($fixture->league_id);
@@ -69,6 +67,27 @@ class FixtureController extends Controller
             $team_2->pivot->save();
             $fixture->update(['pointsAdded' => true]);
         }
+
+        return redirect(route('leagues.show', $fixture->league_id))->with('success', 'Fixture updated!');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDate(Request $request, $id)
+    {
+        $request->validate([
+            'date' => 'required|date',
+        ]);
+
+        $fixture = Fixture::find($id);
+        $fixture->update([
+            'date' => $request->get('date'),
+        ]);
 
         return redirect(route('leagues.show', $fixture->league_id))->with('success', 'Fixture updated!');
     }

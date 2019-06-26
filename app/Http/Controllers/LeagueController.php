@@ -88,9 +88,30 @@ class LeagueController extends Controller
         ]);
 
         $league = League::find($id);
-        $league->name = $request->get('name');
-        $league->save();
+        $league->update([
+            'name' => $request->get('name'),
+        ]);
+        return redirect(route('leagues.index'))->with('success', 'League updated!');
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addTeams(Request $request, $id)
+    {
+        $league = League::find($id);
+        foreach ($request->except(['_method', '_token']) as $team_id => $value) {
+            if ($value === 'on') {
+                $already_in_league = $league->teams()->where('team_id', $team_id)->first();
+                if (is_null($already_in_league)) {
+                    $league->teams()->save(Team::find($team_id));
+                }
+            }
+        }
         return redirect(route('leagues.index'))->with('success', 'League updated!');
     }
 

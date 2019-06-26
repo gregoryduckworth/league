@@ -14,7 +14,7 @@ class CreateFixturesTable extends Migration
     public function up()
     {
         Schema::create('fixtures', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('team_1')->unsigned()->nullable();
             $table->integer('team_1_score')->unsigned()->nullable();
             $table->foreign('team_1')->references('id')

@@ -14,7 +14,7 @@ class CreateLeaguesTable extends Migration
     public function up()
     {
         Schema::create('leagues', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
             $table->boolean('generatedFixtures')->default(false);
             $table->softDeletes();
