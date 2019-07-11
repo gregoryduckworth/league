@@ -25,4 +25,9 @@ class PlayerStat extends Model
     {
         return $this->belongsTo('App\League');
     }
+
+    public function goals($league_id, $team_id)
+    {
+        return $this->where('league_id', $league_id)->where('team_id', $team_id)->get('goals');
+    }
 }

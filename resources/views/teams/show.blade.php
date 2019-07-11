@@ -7,20 +7,19 @@
         <a href="{{ route('teams.index') }}" class="pull-right">Back</a>
     </div>
     <div class="card-body">
-        Team Name:<br />
+        <strong>Team Name:</strong><br />
         {{ $team->name }}<br />
 
-        Contact Name:<br />
+        <strong>Contact Name:</strong><br />
         {{ $team->contact }}<br />
-
-        Leagues:<br />
+        <hr>
+        <strong>Leagues:</strong><br />
         @foreach($team->leagues as $league)
-        <li><a href="{{ route('leagues.show',$league->id) }}">{{ $league->name }}</a></li>
-        @endforeach
-
-        Players:<br />
-        @foreach($team->players as $player)
-        <li><a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a></li>
+            <label><a href="{{ route('leagues.show',$league->id) }}">{{ $league->name }}</a></label><br />
+            <strong>Scorers:</strong><br />
+            @foreach($team->players as $player)
+                <li><a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a> - {{ $player->goals($league->id, $team->id) }}</li>
+            @endforeach
         @endforeach
     </div>
 </div>

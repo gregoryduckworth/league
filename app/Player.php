@@ -24,9 +24,9 @@ class Player extends Model
         return $this->hasMany('App\PlayerStat');
     }
 
-    public function goals($league_id)
+    public function goals($league_id, $team_id)
     {
-        return $this->stats->where('league_id', '=', $league_id)->sum('goals');
+        return $this->stats->where('league_id', $league_id)->where('team_id', $team_id)->sum('goals');
     }
 
     public function allGoals()
@@ -36,6 +36,6 @@ class Player extends Model
 
     public function leagueGoals($league_id)
     {
-        return $this->stats->where('league_id', '=', $league_id)->first()->goals;
+        return $this->stats->where('league_id', $league_id)->sum('goals');
     }
 }

@@ -97,7 +97,7 @@
                     @foreach($team->players as $player)
                     <tr>
                         <td><a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a></td>
-                        <td>{{ $player->goals($league->id) }}</td>
+                        <td>{{ $player->leagueGoals($league->id) }}</td>
                         <td>{{ $team->name }}</td>
                         @auth
                         <td>
