@@ -110,10 +110,11 @@ class PlayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editGoals($player_id, $league_id)
+    public function editGoals($player_id, $team_id, $league_id)
     {
         return view('players.editGoals')
             ->with('league', League::find($league_id))
+            ->with('team', Team::find($team_id))
             ->with('player', Player::find($player_id));
     }
 
@@ -123,10 +124,10 @@ class PlayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function postEditGoals(Request $request, $player_id, $league_id)
+    public function postEditGoals(Request $request, $player_id, $team_id, $league_id)
     {
         $player = Player::find($player_id);
-        $playerStats = $player->stats->where('league_id', '=', $league_id)->first();
+        $playerStats = $player->stats->where('league_id', '=', $league_id)->where('team_id', $team_id)->first();
         $playerStats->update(['goals' => $request->get('goals')]);
         return redirect(route('players.show', $player_id))->with('success', 'Player updated!');
 

@@ -7,10 +7,10 @@
         <a href="{{ route('players.show', $player->id) }}" class="pull-right">Back</a>
     </div>
     <div class="card-body">
-        League Name:<br />
-        {{ $league->name }}<br />
+        <strong>League Name: </strong>{{ $league->name }}<br />
+        <strong>Team Name: </strong>{{ $team->name }}<br /><br />
 
-        <form method="post" action="{{ route('players.editGoals', [$player->id, $league->id]) }}">
+        <form method="post" action="{{ route('players.editGoals', [$player->id, $team->id, $league->id]) }}">
             @method('PATCH')
             @csrf
             <div class="form-group">

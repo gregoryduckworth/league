@@ -86,6 +86,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Goals</th>
+                    <th>Team</th>
                     @auth
                     <th>Actions</th>
                     @endauth
@@ -97,8 +98,14 @@
                     <tr>
                         <td><a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a></td>
                         <td>{{ $player->goals($league->id) }}</td>
+                        <td>{{ $team->name }}</td>
                         @auth
-                        <td></td>
+                        <td>
+                            <a href="{{ route('players.editGoals', [$player->id, $team->id, $league->id]) }}"
+                                class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+                        </td>
                         @endauth
                     </tr>
                     @endforeach
@@ -127,7 +134,7 @@
         });
         $('#fixture_table').DataTable({
             "aaSorting": [
-                [0, 'desc'],
+                [0, 'asc'],
             ],
             "bPaginate": false,
             "columnDefs": [{
@@ -144,7 +151,7 @@
         $('#league_scorers').DataTable({
             "aaSorting": [
                 [1, 'desc'],
-                [0, 'desc'],
+                [0, 'asc'],
             ],
         });
     });
