@@ -27,7 +27,7 @@ class CreateFixturesTable extends Migration
             $table->foreign('league_id')->references('id')->on('leagues')
                 ->onDelete('cascade');
             $table->boolean('pointsAdded')->nullable();
-            $table->dateTime('date')->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }
