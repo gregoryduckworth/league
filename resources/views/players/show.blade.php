@@ -17,16 +17,16 @@
                 @endauth
             </thead>
             <tbody>
-                @foreach($player->leagues as $league)
+                @foreach($player->stats as $stat)
                 <tr>
                     <td>
-                        <a href="{{ route('leagues.show',$league->id) }}">{{ $league->name }}</a>
+                        {{ \App\Team::find($stat->team_id)->name }} - <a href="{{ route('leagues.show', $stat->league_id) }}">{{ \App\League::find($stat->league_id)->name }}</a>
                     </td>
                     <td>
-                        {{ $player->leagueGoals($league->id) }}
+                        {{ $stat->goals }}
                     </td>
                     <td>
-                        <a href="{{ route('players.editGoals', [$player->id, $league->id]) }}"
+                        <a href="{{ route('players.editGoals', [$player->id, $stat->league_id]) }}"
                             class="btn btn-warning btn-sm">
                             Edit
                         </a>

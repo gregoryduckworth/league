@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\League;
 use App\Player;
+use App\PlayerStat;
+use App\Team;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -49,6 +51,56 @@ class PlayerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $player = Player::find($id);
+        $player->update([
+            'name' => $request->get('name'),
+            'team_id' => $request->get('team'),
+        ]);
+        $player->save();
+        $team = Team::find($player->team_id);
+        $league = $team->leagues;
+        if (!$player->stats->where('league_id', $league[0]->id)->where('team_id', $team->id)->first()) {
+            $playerStat = new PlayerStat([
+                'player_id' => $player->id,
+                'league_id' => $league[0]->id,
+                'team_id' => $team->id,
+            ]);
+            $playerStat->save();
+
+        }
+        return redirect(route('players.index'))->with('success', 'Player saved!');
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $player = new Player([
+            'name' => $request->get('name'),
+            'team_id' => $request->get('team'),
+        ]);
+        $player->save();
+        $team = Team::find($player->team_id);
+        $league = $team->leagues;
+        $playerStat = new PlayerStat([
+            'player_id' => $player->id,
+            'league_id' => $league[0]->id,
+            'team_id' => $player->team_id,
+        ]);
+        $playerStat->save();
+        return redirect(route('players.index'))->with('success', 'Player saved!');
 
     }
 

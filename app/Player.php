@@ -19,18 +19,13 @@ class Player extends Model
         return $this->belongsTo('App\Team');
     }
 
-    public function leagues()
-    {
-        return $this->team->leagues();
-    }
-
     public function stats()
     {
         return $this->hasMany('App\PlayerStat');
     }
 
-    public function leagueGoals($league_id)
+    public function goals($league_id)
     {
-        return $this->stats->where('league_id', '=', $league_id)->first()->goals;
+        return $this->stats->where('league_id', '=', $league_id)->sum('goals');
     }
 }

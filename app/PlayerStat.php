@@ -12,11 +12,17 @@ class PlayerStat extends Model
     protected $fillable = [
         'player_id',
         'league_id',
+        'team_id',
         'goals',
     ];
 
     public function player()
     {
         return $this->belongsTo('App\Player');
+    }
+
+    public function league()
+    {
+        return $this->belongsTo('App\League');
     }
 }

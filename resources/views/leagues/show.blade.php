@@ -93,15 +93,15 @@
             </thead>
             <tbody>
                 @foreach($league->teams as $team)
-                @foreach($team->players AS $player)
-                <tr>
-                    <td><a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a></td>
-                    <td>{{ $player->leagueGoals($league->id) }}</td>
-                    @auth
-                    <td></td>
-                    @endauth
-                </tr>
-                @endforeach
+                    @foreach($team->players as $player)
+                    <tr>
+                        <td><a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a></td>
+                        <td>{{ $player->goals($league->id) }}</td>
+                        @auth
+                        <td></td>
+                        @endauth
+                    </tr>
+                    @endforeach
                 @endforeach
             </tbody>
         </table>

@@ -26,4 +26,9 @@ class League extends Model
         return $this->hasMany('App\Fixture');
     }
 
+    public function stats()
+    {
+        return $this->hasMany('App\PlayerStat');
+    }
+
 }
