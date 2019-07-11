@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class TeamController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -36,8 +46,8 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required|unique:teams',
-            'contact'=>'required',
+            'name' => 'required|unique:teams',
+            'contact' => 'required',
         ]);
 
         $team = new Team([
@@ -67,7 +77,7 @@ class TeamController extends Controller
      */
     public function edit($id)
     {
-        return view('teams.edit')->with('team', Team::find($id));  
+        return view('teams.edit')->with('team', Team::find($id));
     }
 
     /**
@@ -80,12 +90,12 @@ class TeamController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'=>'required|unique:teams,'.$id,
-            'contact'=>'required',
+            'name' => 'required|unique:teams,' . $id,
+            'contact' => 'required',
         ]);
 
         $team = Team::find($id);
-        $team->name =  $request->get('name');
+        $team->name = $request->get('name');
         $team->contact = $request->get('contact');
         $team->save();
 
