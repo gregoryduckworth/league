@@ -4,9 +4,11 @@
 <div class="card">
     <div class="card-header">
         Players
+        @auth
         <span class="pull-right">
             <a href="{{ route('players.create') }}">Create</a>
-        </span>
+        </span>            
+        @endauth
     </div>
     <div class="card-body">
         <table class="table" id="players">

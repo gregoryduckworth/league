@@ -4,9 +4,11 @@
 <div class="card">
     <div class="card-header">
         Teams
-        <span class="pull-right">
-            <a href="{{ route('teams.create') }}">Create</a>
-        </span>
+        @auth
+            <span class="pull-right">
+                <a href="{{ route('teams.create') }}">Create</a>
+            </span>
+        @endauth
     </div>
     <div class="card-body">
         <table class="table">

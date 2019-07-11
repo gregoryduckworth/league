@@ -20,7 +20,6 @@
             <hr>
             <button type="submit" class="btn btn-primary pull-right">Update Player</button>
         </form>
-
     </div>
 </div>
 @endsection
