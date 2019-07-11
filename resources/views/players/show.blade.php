@@ -8,33 +8,7 @@
     </div>
     <div class="card-body">
         Statistics:<br />
-        <table class="table">
-            <thead>
-                <th>League Name</th>
-                <th>Goals</th>
-                @auth
-                <th>Actions</th>
-                @endauth
-            </thead>
-            <tbody>
-                @foreach($player->leagues as $league)
-                <tr>
-                    <td>
-                        <a href="{{ route('leagues.show',$league->id) }}">{{ $league->name }}</a>
-                    </td>
-                    <td>
-                        {{ $player->leagueGoals($league->id) }}
-                    </td>
-                    <td>
-                        <a href="{{ route('players.editGoals', [$player->id, $league->id]) }}"
-                            class="btn btn-warning btn-sm">
-                            Edit
-                        </a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <strong>Goals:</strong>{{ $player->goals }}<br />
     </div>
 </div>
 @endsection

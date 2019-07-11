@@ -41,6 +41,26 @@ class PlayerController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $player = new Player([
+            'name' => $request->get('name'),
+            'team_id' => $request->get('team'),
+        ]);
+        $player->save();
+        return redirect(route('players.index'))->with('success', 'Player saved!');
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -49,6 +69,19 @@ class PlayerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $player = Player::find($id);
+        $player->update([
+            'name' => $request->get('name'),
+            'team' => $request->get('team'),
+            'goals' => $request->get('goals'),
+        ]);
+        $player->save();
+
+        return redirect(route('players.index'))->with('success', 'Player saved!');
 
     }
 

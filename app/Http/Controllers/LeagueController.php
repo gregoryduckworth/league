@@ -106,8 +106,7 @@ class LeagueController extends Controller
         $league = League::find($id);
         foreach ($request->except(['_method', '_token']) as $team_id => $value) {
             if ($value === 'on') {
-                $already_in_league = $league->teams()->where('team_id', $team_id)->first();
-                if (is_null($already_in_league)) {
+                if (is_null($league->teams()->where('team_id', $team_id)->first())) {
                     $league->teams()->save(Team::find($team_id));
                 }
             }

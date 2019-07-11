@@ -19,6 +19,7 @@ class CreatePlayersTable extends Migration
             $table->integer('team_id')->unsigned()->nullable();
             $table->foreign('team_id')->references('id')
                 ->on('teams')->onDelete('cascade');
+            $table->integer('goals')->default('0');
             $table->softDeletes();
             $table->timestamps();
         });

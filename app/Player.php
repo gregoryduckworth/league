@@ -12,25 +12,11 @@ class Player extends Model
     protected $fillable = [
         'name',
         'team_id',
+        'goals',
     ];
 
     public function team()
     {
         return $this->belongsTo('App\Team');
-    }
-
-    public function leagues()
-    {
-        return $this->team->leagues();
-    }
-
-    public function stats()
-    {
-        return $this->hasMany('App\PlayerStat');
-    }
-
-    public function leagueGoals($league_id)
-    {
-        return $this->stats->where('league_id', '=', $league_id)->first()->goals;
     }
 }
