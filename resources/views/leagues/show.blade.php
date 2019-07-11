@@ -145,7 +145,6 @@
                 "targets": [2, 3, 4],
                 "orderable": false,
             }],
-            "searching": false,
             "info": false,
             "lengthChange": false,
             "language": {
