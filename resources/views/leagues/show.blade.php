@@ -68,11 +68,11 @@
                 @foreach($league->fixtures as $fixture)
                 <tr>
                     <td>{{ $fixture->date }}</td>
-                    <td>{{ App\Team::find($fixture->team_1)->name }}</td>
+                    <td><a href="{{ route('teams.show', $fixture->team_1) }}">{{ App\Team::find($fixture->team_1)->name }}</a></td>
                     <td>{{ $fixture->team_1_score }}</td>
                     <td>v</td>
                     <td>{{ $fixture->team_2_score }}</td>
-                    <td>{{ App\Team::find($fixture->team_2)->name }}</td>
+                    <td><a href="{{ route('teams.show', $fixture->team_2) }}">{{ App\Team::find($fixture->team_2)->name }}</a></td>
                     @auth
                     <td><a href="{{ route('fixtures.edit',$fixture->id) }}" class="btn btn-warning btn-sm">Edit</a></td>
                     @endauth
