@@ -28,4 +28,9 @@ class Player extends Model
     {
         return $this->stats->where('league_id', '=', $league_id)->sum('goals');
     }
+
+    public function leagueGoals($league_id)
+    {
+        return $this->stats->where('league_id', '=', $league_id)->first()->goals;
+    }
 }
