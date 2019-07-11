@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">
         Add a Team
-        <a href="{{ route('teams.index') }}" class="pull-right">Back</a>
+        <a href="{{ url()->previous() }}" class="pull-right">Back</a>
     </div>
     <div class="card-body">
         <form method="post" action="{{ route('teams.store') }}">

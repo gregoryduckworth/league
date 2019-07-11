@@ -13,8 +13,10 @@
             <thead>
                 <th>Name</th>
                 <th>Contact</th>
+                @auth
                 <th style="width:5%"></th>
                 <th style="width:5%"></th>
+                @endauth
             </thead>
             <tbody>
                 @foreach($teams as $team)
@@ -24,6 +26,7 @@
                     <td>
                         <a href="{{ route('teams.edit',$team->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     </td>
+                    @auth
                     <td>
                         <form action="{{ route('teams.destroy', $team->id)}}" method="post">
                             @csrf
@@ -31,6 +34,7 @@
                             <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                         </form>
                     </td>
+                    @endauth
                 </tr>
                 @endforeach
             </tbody>

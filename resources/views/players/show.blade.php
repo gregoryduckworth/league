@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">
         {{ $player->name }}
-        <a href="{{ route('players.index') }}" class="pull-right">Back</a>
+        <a href="{{ url()->previous() }}" class="pull-right">Back</a>
     </div>
     <div class="card-body">
         Statistics:<br />
@@ -25,12 +25,14 @@
                     <td>
                         {{ $stat->goals }}
                     </td>
+                    @auth
                     <td>
                         <a href="{{ route('players.editGoals', [$player->id, $stat->team_id, $stat->league_id]) }}"
                             class="btn btn-warning btn-sm">
                             Edit
                         </a>
                     </td>
+                    @endauth
                 </tr>
                 @endforeach
             </tbody>

@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">
         {{ $team->name }}
-        <a href="{{ route('teams.index') }}" class="pull-right">Back</a>
+        <a href="{{ url()->previous() }}" class="pull-right">Back</a>
     </div>
     <div class="card-body">
         <strong>Team Name:</strong><br />

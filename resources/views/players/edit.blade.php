@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">
         Edit Player
-        <a href="{{ route('players.index') }}" class="pull-right">Back</a>
+        <a href="{{ url()->previous() }}" class="pull-right">Back</a>
     </div>
     <div class="card-body">
         <form method="post" action="{{ route('players.update', $player->id) }}">
