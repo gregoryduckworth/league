@@ -10,6 +10,7 @@
         <table class="table" id="league_table">
             <thead>
                 <th>Team Name</th>
+                <th>P</th>
                 <th>W</th>
                 <th>D</th>
                 <th>L</th>
@@ -23,6 +24,9 @@
                 <tr>
                     <td>
                         <a href="{{ route('teams.show',$team->id) }}">{{ $team->name }}</a>
+                    </td>
+                    <td>
+                        {{ $team ->pivot->won + $team ->pivot->drawn + $team ->pivot->lost }}
                     </td>
                     <td>
                         {{ $team ->pivot->won }}
