@@ -26,7 +26,7 @@
                         {{ $stat->goals }}
                     </td>
                     <td>
-                        <a href="{{ route('players.editGoals', [$player->id, $stat->league_id, $stat->league_id]) }}"
+                        <a href="{{ route('players.editGoals', [$player->id, $stat->team_id, $stat->league_id]) }}"
                             class="btn btn-warning btn-sm">
                             Edit
                         </a>
