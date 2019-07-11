@@ -23,10 +23,10 @@
                 <tr>
                     <td><a href="{{ route('teams.show', $team->id) }}">{{ $team->name }}</a></td>
                     <td>{{ $team->contact }}</td>
+                    @auth
                     <td>
                         <a href="{{ route('teams.edit',$team->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     </td>
-                    @auth
                     <td>
                         <form action="{{ route('teams.destroy', $team->id)}}" method="post">
                             @csrf
