@@ -6,7 +6,7 @@
             {{ $league->name }}
             <a href="{{ url()->previous() }}" class="pull-right">Back</a>
         </div>
-        <div class="card-body d-block">
+        <div class="card-body">
             <table class="table" id="league_table">
                 <thead>
                     <th>Team Name</th>

@@ -105,7 +105,7 @@
     </section>
 
     <footer class="container fixed-bottom">
-        <div class="float-right">{{ env('SOURCE_VERSION') ?? "No commit version" }}</div>
+        <div class="float-right">@version</div>
     </footer>
 </body>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
