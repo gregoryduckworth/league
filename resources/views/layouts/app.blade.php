@@ -104,7 +104,7 @@
         </div>
     </section>
 
-    <footer class="container fixed-bottom">
+    <footer class="fixed-bottom">
         <div class="float-right">@version</div>
     </footer>
 </body>
