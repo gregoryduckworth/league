@@ -16,8 +16,11 @@
                 <th>Name</th>
                 <th>Team</th>
                 <th>Goals</th>
+                @auth
                 <th style="width:5%"></th>
                 <th style="width:5%"></th>
+                <th style="width:5%"></th>
+                @endauth
             </thead>
             <tbody>
                 @foreach($players as $player)
@@ -25,8 +28,12 @@
                     <td><a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a></td>
                     <td><a href="{{ route('teams.show', $player->team_id) }}">{{ \App\Team::find($player->team_id)->name }}</a></td>
                     <td>{{ $player->allGoals() }}</a></td>
+                    @auth
                     <td>
-                        <a href="{{ route('players.edit',$player->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('players.show',$player->id) }}" class="btn btn-info btn-sm">Info</a>
+                    </td>
+                    <td>
+                        <a href="{{ route('players.edit',$player->id) }}" class="btn btn-warning btn-sm">Edit Player</a>
                     </td>
                     <td>
                         <form action="{{ route('players.destroy', $player->id)}}" method="post">
@@ -35,6 +42,7 @@
                             <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                         </form>
                     </td>
+                    @endauth
                 </tr>
                 @endforeach
             </tbody>

@@ -29,7 +29,7 @@
                     <td>
                         <a href="{{ route('players.editGoals', [$player->id, $stat->team_id, $stat->league_id]) }}"
                             class="btn btn-warning btn-sm">
-                            Edit
+                            Edit Goals
                         </a>
                     </td>
                     @endauth
