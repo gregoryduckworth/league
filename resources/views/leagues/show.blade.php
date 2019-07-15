@@ -6,7 +6,7 @@
         {{ $league->name }}
         <a href="{{ url()->previous() }}" class="pull-right">Back</a>
     </div>
-    <div class="card-body">
+    <div class="card-body d-block">
         <table class="table" id="league_table">
             <thead>
                 <th>Team Name</th>
@@ -125,37 +125,40 @@
 <script>
     $(document).ready(function () {
         $('#league_table').DataTable({
-            "aaSorting": [
+            aaSorting: [
                 [7, 'desc'],
                 [6, 'desc'],
                 [4, 'desc'],
                 [5, 'desc'],
             ],
-            "bPaginate": false,
-            "searching": false,
-            "info": false,
-            "lengthChange": false,
+            bPaginate: false,
+            searching: false,
+            info: false,
+            lengthChange: false,
+            responsive: true
         });
         $('#fixture_table').DataTable({
-            "aaSorting": [
+            aaSorting: [
                 [0, 'asc'],
             ],
-            "bPaginate": false,
-            "columnDefs": [{
-                "targets": [2, 3, 4],
-                "orderable": false,
+            bPaginate: false,
+            columnDefs: [{
+                targets: [2, 3, 4],
+                orderable: false,
             }],
-            "info": false,
-            "lengthChange": false,
-            "language": {
+            info: false,
+            lengthChange: false,
+            language: {
                 "emptyTable": "No fixtures have been generated yet. Let's go and <a href='{{ route('leagues.edit', $league->id) }}'>generate fixtures</a>"
-            }
+            },
+            responsive: true
         });
         $('#league_scorers').DataTable({
-            "aaSorting": [
+            aaSorting: [
                 [1, 'desc'],
                 [0, 'asc'],
             ],
+            responsive: true
         });
     });
 
