@@ -27,6 +27,9 @@ class CreateLeagueTeamTable extends Migration
             $table->integer('goalsFor')->default(0);
             $table->integer('goalsAgainst')->default(0);
             $table->timestamps();
+
+            $table->primary(['league_id', 'team_id']);
+
         });
     }
 
