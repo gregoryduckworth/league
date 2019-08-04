@@ -65,7 +65,7 @@ class FixtureController extends Controller
             $team_2->pivot->goalsAgainst += $fixture->team_1_score;
             $team_1->pivot->save();
             $team_2->pivot->save();
-            $fixture->update(['pointsAdded' => true]);
+            $fixture->update(['pointsAdded' => '1']);
         }
 
         return redirect(route('leagues.show', $fixture->league_id))->with('success', 'Fixture updated!');
