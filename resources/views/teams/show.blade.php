@@ -17,10 +17,29 @@
         @foreach($team->leagues as $league)
             <label><a href="{{ route('leagues.show',$league->id) }}">{{ $league->name }}</a></label><br />
             <strong>Scorers:</strong><br />
+            <table class="table" id="players">
             @foreach($team->players as $player)
-                <li><a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a> - {{ $player->goals($league->id, $team->id) }}</li>
+                <tr>
+                    <td>
+                        <a href="{{ route('players.show', $player->id) }}">{{ $player->name }}</a>
+                    </td>
+                    <td>{{ $player->goals($league->id, $team->id) }}</td>
+                </tr>
             @endforeach
+            </table>
         @endforeach
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function () {
+        $('#players').DataTable({
+            "info": false,
+            "lengthChange": false,
+        });
+    });
+
+</script>
 @endsection
