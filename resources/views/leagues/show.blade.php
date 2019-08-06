@@ -47,7 +47,7 @@
                             {{ ($team->team_1_for + $team->team_2_for) - ($team->team_1_against + $team->team_2_against ) }}
                         </td>
                         <td>
-                            {{ $team->points }}
+                            {{ $team->team_1_points + $team->team_2_points }}
                         </td>
                     </tr>
                     @endforeach
@@ -126,10 +126,10 @@
     $(document).ready(function () {
         $('#league_table').DataTable({
             aaSorting: [
+                [8, 'desc'],
                 [7, 'desc'],
-                [6, 'desc'],
-                [4, 'desc'],
                 [5, 'desc'],
+                [6, 'desc'],
             ],
             bPaginate: false,
             searching: false,
