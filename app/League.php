@@ -21,15 +21,25 @@ class League extends Model
             ->withTimestamps();
     }
 
+/*
+SELECT
+SUM(CASE
+WHEN `team_1_score` > `team_2_score` THEN '3'
+WHEN `team_1_score` = `team_2_score` THEN '1'
+ELSE '0'
+END) AS `points`
+FROM `fixtures`
+ */
+
     public function teamStandings()
     {
         $team_1 = \DB::table('fixtures as f1')
-            ->select('team_1', \DB::raw('SUM(`team_1_score`) AS `team_1_for`'), \DB::raw('SUM(`team_2_score`) AS `team_2_against`'))
+            ->select('team_1', \DB::raw('SUM(`team_1_score`) AS `team_1_for`'), \DB::raw('SUM(`team_2_score`) AS `team_2_against`'), \DB::raw('SUM(CASE WHEN `team_1_score` > `team_2_score` THEN \'3\' WHEN `team_1_score` = `team_2_score` AND `pointsAdded` IS NOT NULL THEN \'1\' ELSE \'0\' END) AS `team_1_points`'))
             ->where('league_id', '=', $this->id)
             ->groupBy('team_1');
 
         $team_2 = \DB::table('fixtures as f2')
-            ->select('team_2', \DB::raw('SUM(`team_1_score`) AS `team_1_against`'), \DB::raw('SUM(`team_2_score`) AS `team_2_for`'))
+            ->select('team_2', \DB::raw('SUM(`team_1_score`) AS `team_1_against`'), \DB::raw('SUM(`team_2_score`) AS `team_2_for`'), \DB::raw('SUM(CASE WHEN `team_2_score` > `team_1_score` THEN \'3\' WHEN `team_1_score` = `team_2_score` AND `pointsAdded` IS NOT NULL THEN \'1\' ELSE \'0\' END) AS `team_2_points`'))
             ->where('league_id', '=', $this->id)
             ->groupBy('team_2');
 
