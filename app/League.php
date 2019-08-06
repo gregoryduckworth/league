@@ -16,9 +16,24 @@ class League extends Model
 
     public function teams()
     {
+        $team_1 = \DB::table('fixtures as f1')
+            ->select('team_1', \DB::raw('SUM(`team_1_score`) AS `team_1_for`'), \DB::raw('SUM(`team_2_score`) AS `team_2_against`'))
+            ->where('league_id', '=', $this->id)
+            ->groupBy('team_1');
+
+        $team_2 = \DB::table('fixtures as f2')
+            ->select('team_2', \DB::raw('SUM(`team_1_score`) AS `team_1_against`'), \DB::raw('SUM(`team_2_score`) AS `team_2_for`'))
+            ->where('league_id', '=', $this->id)
+            ->groupBy('team_2');
+
         return $this->belongsToMany('App\Team')
-            ->withPivot('points', 'won', 'drawn', 'lost', 'goalsFor', 'goalsAgainst')
-            ->withTimestamps();
+            ->joinSub($team_1, 'f1', function ($join) {
+                $join->on('f1.team_1', '=', 'teams.id');
+            })
+            ->joinSub($team_2, 'f2', function ($join) {
+                $join->on('f2.team_2', '=', 'teams.id');
+            })
+            ->select('*');
     }
 
     public function fixtures()

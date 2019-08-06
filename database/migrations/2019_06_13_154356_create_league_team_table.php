@@ -24,8 +24,6 @@ class CreateLeagueTeamTable extends Migration
             $table->integer('won')->default(0);
             $table->integer('drawn')->default(0);
             $table->integer('lost')->default(0);
-            $table->integer('goalsFor')->default(0);
-            $table->integer('goalsAgainst')->default(0);
             $table->timestamps();
 
             $table->primary(['league_id', 'team_id']);
