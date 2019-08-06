@@ -59,10 +59,6 @@ class FixtureController extends Controller
                 $team_1->pivot->drawn += 1;
                 $team_2->pivot->drawn += 1;
             }
-            $team_1->pivot->goalsFor += $fixture->team_1_score;
-            $team_1->pivot->goalsAgainst += $fixture->team_2_score;
-            $team_2->pivot->goalsFor += $fixture->team_2_score;
-            $team_2->pivot->goalsAgainst += $fixture->team_1_score;
             $team_1->pivot->save();
             $team_2->pivot->save();
             $fixture->pointsAdded = 1;

@@ -20,34 +20,34 @@
                     <th>Points</th>
                 </thead>
                 <tbody>
-                    @foreach($league->teams as $team)
+                    @foreach($league->teamStandings as $team)
                     <tr>
                         <td>
                             <a href="{{ route('teams.show',$team->id) }}">{{ $team->name }}</a>
                         </td>
                         <td>
-                            {{ $team ->pivot->won + $team ->pivot->drawn + $team ->pivot->lost }}
+                            {{ $team->won + $team->drawn + $team->lost }}
                         </td>
                         <td>
-                            {{ $team ->pivot->won }}
+                            {{ $team->won }}
                         </td>
                         <td>
-                            {{ $team ->pivot->drawn }}
+                            {{ $team->drawn }}
                         </td>
                         <td>
-                            {{ $team ->pivot->lost }}
+                            {{ $team->lost }}
                         </td>
                         <td>
-                            {{ $team ->pivot->goalsFor }}
+                            {{ $team->team_1_for + $team->team_2_for }}
                         </td>
                         <td>
-                            {{ $team ->pivot->goalsAgainst }}
+                            {{ $team->team_1_against + $team->team_2_against }}
                         </td>
                         <td>
-                            {{ ($team ->pivot->goalsFor - $team->pivot->goalsAgainst) }}
+                            {{ ($team->team_1_for + $team->team_2_for) - ($team->team_1_against + $team->team_2_against ) }}
                         </td>
                         <td>
-                            {{ $team ->pivot->points }}
+                            {{ $team->points }}
                         </td>
                     </tr>
                     @endforeach
