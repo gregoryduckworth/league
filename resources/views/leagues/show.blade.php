@@ -20,7 +20,7 @@
                     <th>Points</th>
                 </thead>
                 <tbody>
-                    @foreach($league->teams as $team)
+                    @foreach($league->teamStandings as $team)
                     <tr>
                         <td>
                             <a href="{{ route('teams.show',$team->id) }}">{{ $team->name }}</a>

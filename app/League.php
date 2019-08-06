@@ -16,6 +16,13 @@ class League extends Model
 
     public function teams()
     {
+        return $this->belongsToMany('App\Team')
+            ->withPivot('points', 'won', 'drawn', 'lost')
+            ->withTimestamps();
+    }
+
+    public function teamStandings()
+    {
         $team_1 = \DB::table('fixtures as f1')
             ->select('team_1', \DB::raw('SUM(`team_1_score`) AS `team_1_for`'), \DB::raw('SUM(`team_2_score`) AS `team_2_against`'))
             ->where('league_id', '=', $this->id)
