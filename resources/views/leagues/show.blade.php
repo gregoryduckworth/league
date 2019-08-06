@@ -126,10 +126,10 @@
     $(document).ready(function () {
         $('#league_table').DataTable({
             aaSorting: [
-                [8, 'desc'],
-                [7, 'desc'],
-                [5, 'desc'],
-                [6, 'desc'],
+                [-1, 'desc'],
+                [-2, 'desc'],
+                [-4, 'desc'],
+                [-3, 'desc'],
             ],
             bPaginate: false,
             searching: false,

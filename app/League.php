@@ -21,16 +21,6 @@ class League extends Model
             ->withTimestamps();
     }
 
-/*
-SELECT
-SUM(CASE
-WHEN `team_1_score` > `team_2_score` THEN '3'
-WHEN `team_1_score` = `team_2_score` THEN '1'
-ELSE '0'
-END) AS `points`
-FROM `fixtures`
- */
-
     public function teamStandings()
     {
         $team_1 = \DB::table('fixtures as f1')
