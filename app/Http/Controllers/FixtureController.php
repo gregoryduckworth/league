@@ -44,10 +44,8 @@ class FixtureController extends Controller
         $team_1 = $league->teams()->where('team_id', '=', $fixture->team_1)->first();
         $team_2 = $league->teams()->where('team_id', '=', $fixture->team_2)->first();
 
-        if ($fixture->pointsAdded == null) {
-            $fixture->pointsAdded = 1;
-            $fixture->save();
-        }
+        $fixture->pointsAdded = ($request->get('pointsAdded') == 'on' ? 1 : null);
+        $fixture->save();
 
         return redirect(route('leagues.show', $fixture->league_id))->with('success', 'Fixture updated!');
     }

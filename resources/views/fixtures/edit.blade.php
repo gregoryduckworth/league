@@ -29,6 +29,11 @@
                 <label for="name">{{ App\Team::find($fixture->team_2)->name }} Score:</label>
                 <input type="text" class="form-control" name="team_2_score" value="{{ $fixture->team_2_score }}" />
             </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="pointsAdded" name="pointsAdded"
+                    {{ $fixture->pointsAdded ? 'checked="checked"' : '' }}>
+                 <label class="form-check-label">Game Played</label>
+            </div>
             <button type="submit" class="btn btn-primary pull-right">Update Score</button>
         </form>
     </div>
