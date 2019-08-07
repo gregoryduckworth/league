@@ -26,16 +26,16 @@
                             <a href="{{ route('teams.show',$team->id) }}">{{ $team->name }}</a>
                         </td>
                         <td>
-                            {{ $team->won + $team->drawn + $team->lost }}
+                            {{ $team->home_win + $team->home_draw + $team->home_loss + $team->away_win + $team->away_draw + $team->away_loss }}
                         </td>
                         <td>
-                            {{ $team->won }}
+                            {{ $team->home_win + $team->away_win }}
                         </td>
                         <td>
-                            {{ $team->drawn }}
+                            {{ $team->home_draw + $team->away_draw }}
                         </td>
                         <td>
-                            {{ $team->lost }}
+                            {{ $team->home_loss + $team->away_loss }}
                         </td>
                         <td>
                             {{ $team->team_1_for + $team->team_2_for }}
@@ -47,7 +47,7 @@
                             {{ ($team->team_1_for + $team->team_2_for) - ($team->team_1_against + $team->team_2_against ) }}
                         </td>
                         <td>
-                            {{ $team->team_1_points + $team->team_2_points }}
+                            {{ (($team->home_win + $team->away_win) * 3) + ($team->home_draw + $team->away_draw) }}
                         </td>
                     </tr>
                     @endforeach

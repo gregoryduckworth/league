@@ -20,10 +20,6 @@ class CreateLeagueTeamTable extends Migration
             $table->integer('team_id')->unsigned()->nullable();
             $table->foreign('team_id')->references('id')
                 ->on('teams')->onDelete('cascade');
-            $table->integer('points')->default(0);
-            $table->integer('won')->default(0);
-            $table->integer('drawn')->default(0);
-            $table->integer('lost')->default(0);
             $table->timestamps();
 
             $table->primary(['league_id', 'team_id']);
