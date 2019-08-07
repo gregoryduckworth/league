@@ -45,22 +45,6 @@ class FixtureController extends Controller
         $team_2 = $league->teams()->where('team_id', '=', $fixture->team_2)->first();
 
         if ($fixture->pointsAdded == null) {
-            if ($fixture->team_1_score > $fixture->team_2_score) {
-                $team_1->pivot->points += 3;
-                $team_1->pivot->won += 1;
-                $team_2->pivot->lost += 1;
-            } else if ($fixture->team_1_score < $fixture->team_2_score) {
-                $team_2->pivot->points += 3;
-                $team_2->pivot->won += 1;
-                $team_1->pivot->lost += 1;
-            } else {
-                $team_1->pivot->points += 1;
-                $team_2->pivot->points += 1;
-                $team_1->pivot->drawn += 1;
-                $team_2->pivot->drawn += 1;
-            }
-            $team_1->pivot->save();
-            $team_2->pivot->save();
             $fixture->pointsAdded = 1;
             $fixture->save();
         }

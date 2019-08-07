@@ -17,19 +17,26 @@ class League extends Model
     public function teams()
     {
         return $this->belongsToMany('App\Team')
-            ->withPivot('points', 'won', 'drawn', 'lost')
             ->withTimestamps();
     }
 
     public function teamStandings()
     {
         $team_1 = \DB::table('fixtures as f1')
-            ->select('team_1', \DB::raw('SUM(`team_1_score`) AS `team_1_for`'), \DB::raw('SUM(`team_2_score`) AS `team_2_against`'), \DB::raw('SUM(CASE WHEN `team_1_score` > `team_2_score` THEN \'3\' WHEN `team_1_score` = `team_2_score` AND `pointsAdded` IS NOT NULL THEN \'1\' ELSE \'0\' END) AS `team_1_points`'))
+            ->select('team_1', \DB::raw('SUM(`team_1_score`) AS `team_1_for`'), \DB::raw('SUM(`team_2_score`) AS `team_2_against`'),
+                \DB::raw('SUM(CASE WHEN `team_1_score` > `team_2_score` THEN \'1\' END) AS `home_win`'),
+                \DB::raw('SUM(CASE WHEN `team_1_score` = `team_2_score` AND `pointsAdded` IS NOT NULL THEN \'1\' END) AS `home_draw`'),
+                \DB::raw('SUM(CASE WHEN `team_1_score` < `team_2_score` THEN \'1\' END) AS `home_loss`')
+            )
             ->where('league_id', '=', $this->id)
             ->groupBy('team_1');
 
         $team_2 = \DB::table('fixtures as f2')
-            ->select('team_2', \DB::raw('SUM(`team_1_score`) AS `team_1_against`'), \DB::raw('SUM(`team_2_score`) AS `team_2_for`'), \DB::raw('SUM(CASE WHEN `team_2_score` > `team_1_score` THEN \'3\' WHEN `team_1_score` = `team_2_score` AND `pointsAdded` IS NOT NULL THEN \'1\' ELSE \'0\' END) AS `team_2_points`'))
+            ->select('team_2', \DB::raw('SUM(`team_1_score`) AS `team_1_against`'), \DB::raw('SUM(`team_2_score`) AS `team_2_for`'),
+                \DB::raw('SUM(CASE WHEN `team_2_score` > `team_1_score` THEN \'1\' END) AS `away_win`'),
+                \DB::raw('SUM(CASE WHEN `team_2_score` = `team_1_score` AND `pointsAdded` IS NOT NULL THEN \'1\' END) AS `away_draw`'),
+                \DB::raw('SUM(CASE WHEN `team_2_score` < `team_1_score` THEN \'1\' END) AS `away_loss`')
+            )
             ->where('league_id', '=', $this->id)
             ->groupBy('team_2');
 
